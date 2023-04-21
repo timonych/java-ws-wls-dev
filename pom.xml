@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ws-wls-webapp</module>
+        <module>ws-wls-ear</module>
+        <module>ws-wls-ear-second</module>
+    </modules>
+
+    <groupId>ru.pa.ws</groupId>
+    <artifactId>ws-wls-dev</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <app-name>ws-wls</app-name>
+        <app-group>ru.pa.ws</app-group>
+        <oracleServerUrl>t3://vmwlsadm-dev:7001</oracleServerUrl>
+        <webapp-contextRoot>/services/</webapp-contextRoot>
+        <sonar.projectName>WS-WLS-DEV</sonar.projectName>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>gitea</id>
+            <url>https://gitea.prs.hms.com.ru/api/packages/Java/maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>gitea</id>
+            <url>https://gitea.prs.hms.com.ru/api/packages/Java/maven</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>com.github.danielflower.mavenplugins</groupId>
+            <artifactId>multi-module-maven-release-plugin</artifactId>
+            <version>3.6.1</version>
+            <configuration>
+                <skipTests>true</skipTests>
+                <noChangesAction>ReleaseNone</noChangesAction>
+            </configuration>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>2.5.3</version>
+            <configuration>
+                <tagNameFormat>v@{project.version}</tagNameFormat>
+                <autoVersionSubmodules>true</autoVersionSubmodules>
+                <releaseProfiles>releases,weblogic</releaseProfiles>
+                <preparationGoals>clean jxr:jxr install</preparationGoals>
+                <goals>deploy</goals>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>1.8.1</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+    
+</project>

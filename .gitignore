@@ -1,0 +1,17 @@
+.metadata/
+.metadata/*
+.metadata/*/*
+.idea
+bin/
+tmp/
+out
+*.class
+*.lock
+*.log
+.recommenders/
+RemoteSystemsTempFiles/
+~*
+*.iml
+.war
+.ear
+target
