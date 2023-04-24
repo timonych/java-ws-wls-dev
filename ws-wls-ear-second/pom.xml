@@ -27,7 +27,7 @@
         <dependency>
             <groupId>ru.pa.ws</groupId>
             <artifactId>ws-wls-ear</artifactId>
-            <version>${java.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     
